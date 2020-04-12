@@ -1,0 +1,87 @@
+body {
+  font: normal 14px Arial;
+}
+
+input{
+  font: normal 14px Arial;
+  border: 0;
+    outline: 0;
+    border-bottom: 2px solid blue;
+    width: 300px;
+    color: darkgray;
+}
+
+
+.center {
+  margin: auto;
+  width: 540px;
+  padding: 10px;
+}
+
+.line{
+  width:300px;
+}
+
+
+#title{
+  position:fixed;
+  top: 10px;
+  right: 20px;
+  border-style: solid;
+  padding:4px;  
+  font: normal 20px Arial;
+}
+
+#infoDiv{
+  position:fixed;
+  top: 20px;
+  right: 20px;
+  padding-top:50px;
+  padding-right: -15px;
+  text-align: right;
+  color: gray;
+}
+
+.info{
+  padding:4px;
+}
+
+.comment{
+  width:300px;
+  font: normal 12px arial;
+  float:right;
+  font-style: italic;
+  color: darkgray;
+}
+
+
+
+.strike{
+    position: relative;
+}
+/*https://stackoverflow.com/a/14639093
+*/
+.strike::after{
+    content: '';
+    border-bottom: 2px solid #ff7328;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+}
+
+
+.boringWord{
+  background-color: #e5ffa8;
+  font-weight: bold;
+}
+
+#input{
+  padding-top: 60px;
+}
+
+#aboutButton{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+}

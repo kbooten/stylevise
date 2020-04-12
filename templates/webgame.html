@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>StyleVise</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+      <div id="title">Style🗜Vise</div>
+    <div id="infoDiv">
+      <div id="levelOuter" class="info">Level: <span id="levelInner">EASY</span></div>
+      <div id="pointOuter" class="info">👍 until next level: <span id="pointInner"></span></div>
+      <div id="lifeOuter" class="info">💖 remaining:<span id="lifeInner">10</span></div>
+    </div>
+    <div id="dummy">
+    </div>
+    <div id="input" class="center">
+      <input type="text" id="nextLine">
+    </div>
+    <button id="aboutButton" onclick="about();">About</button> 
+  </body>
+	<script>
+
+
+    var successfulInputs = 0;
+    var currentLevel = 0;
+    var oldSentences = [];
+    var untilNextLevelConst = 10;
+    var untilNextLevel = untilNextLevelConst.valueOf();
+    var lifeLeft = 10;
+    var maxLevel = 4;
+
+
+    var num2word = {
+      0:"EASY",
+      1:"MEDIUM",
+      2:"HARD",
+      3:"EXPERT",
+      4:"EVIL",
+    }
+
+
+    $('#nextLine').on('keypress',function(e){  // https://stackoverflow.com/a/9893269
+       if(e.which === 13){
+          $(this).attr("disabled", "disabled");
+          var inputText = $("#nextLine").val();
+          var lastLetter = inputText.slice(-1);
+          var puncts = [".","?","!"]
+          if (puncts.includes(lastLetter)==false){
+            addLine("Proper punctuation, please...",failed=false,comment=true) 
+          }else{
+            evaluateInput(inputText);     // evaluate
+            oldSentences.push(inputText);
+          }
+          $('#nextLine').val('')                  // reset
+          $(this).removeAttr("disabled");
+       }
+    });
+
+
+
+    function evaluateInput(inputText){
+      fetch('/evaluate',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(
+              {
+                "currentSentence": inputText,
+                "currentLevel": currentLevel,
+                "oldSentences": oldSentences,
+              }
+            ),
+        }).then(function (response){
+          return response.json();
+        }).then(function (evaluation){
+          addTextBasedOnDiagnosis(evaluation);
+          updateGameState(evaluation)
+      });
+    }
+
+
+    function gameOver(){
+      if(!alert('GAME OVER')){window.location.reload();}
+    }
+
+
+    function levelUp(){
+      if (currentLevel<maxLevel){
+        currentLevel+=1;
+        $("#levelInner").text(num2word[currentLevel]);
+        untilNextLevel = untilNextLevelConst.valueOf();
+        $("#pointInner").text(untilNextLevel)
+      }else{
+        if(!alert('🎉🎆🙌\n  YOU WIN!\n💫💫💫\nELITE SENTENCE GENERATOR!\n🧠🤟💯')){window.location.reload();} // win message
+      }
+    }
+
+    function updateGameState(results){
+      if (results['interesting']==false || results['unique']==false){
+        lifeLeft-=1;
+        $("#lifeInner").text(lifeLeft);
+        if (lifeLeft==0){
+          gameOver();
+        }
+      }else{
+        untilNextLevel-=1;
+        $("#pointInner").text(untilNextLevel)
+        if (untilNextLevel==0){
+          levelUp();
+        }
+      }
+    }
+
+
+    function addLine(text,failed=false,comment=false){
+      var container = document.createElement("div");
+      var line = document.createElement("span");
+      $(line).html(text)
+      if (failed==true){
+        //
+        $(line).addClass('line')        
+        $(line).addClass('strike')
+      } else if (comment==true){
+        //
+        $(line).addClass('comment')
+      } else {
+        //
+        $(line).addClass('line')
+      }
+      container.appendChild(line)
+      $(container).addClass('center')
+      $("#dummy").append(container)
+    }
+
+
+    function ch(x){
+      return x[Math.floor(Math.random()*x.length)]
+    }
+
+
+    function boringComment(results){
+      var insults = ["*Yawn*","Same old same old.","Is that all you got?","...zzzzz..."];
+      anInsult = ch(insults);
+      return anInsult + "<br>💖-1"
+    }
+
+    function praise(){
+      var praises = ["Nice!","Impressive.","Solid.","Right on.","Now THAT'S typing.","Yes, make it new!"];
+      aPraise = ch(praises)
+      return aPraise + "<br>👍+1"
+    }
+
+
+    function unUniqueComment(results){
+      return "You've already written \""+results['originalLine']+"\"<br>Can't you come up with something new?<br>💖-1"
+    }
+
+    function addTextBasedOnDiagnosis(results){
+      if (results['unique']==false){
+        addLine(results['originalLine'],failed=true)
+        addLine(unUniqueComment(results),failed=false,comment=true)    
+      } else if (results['interesting']==false){
+        addLine(results['originalLine'],failed=true)
+        addLine(boringComment(),failed=false,comment=true)  
+      } else {
+        addLine(results['originalLine']);
+        addLine(praise(),failed=false,comment=true);
+        successfulInputs+=1;
+        //increaseDifficulty();        
+      }
+    }
+
+
+    function about(){
+      alert("STYLE🗜VISE is a training program designed to goad writers toward more interesting syntax.\n\nThe syntax of the sentence 'I am a dog.' can be thought of as its part-of-speech sequence: a *pronoun*, a *present tense verb*, an *article*, a *singular noun*, and then *punctuation*.  Style🗜Vise has read over a million sentences from the Project Gutenberg corpus as well as Amazon reviews, and it knows what part-of-speech sequences are common and which are rare. To get praise (👍) from Style🗜Vise, you have to write a sentence that avoids these frequent patterns. As you write, however, Style🗜Vise's restrictions will tighten so that you must avoid not just the most common (boring) syntax patterns but rarer and rarer ones. If you bore Style🗜Vise, you'll lose one of your 10 lives (💖). If you run out of lives you'll have to start over.\n\nStyle🗜Vise is one of a series of \"progymnasmata\" that aim to repurpose the techniques of Natural Language Processing to push the human writer into productively uncomfortable and unfamiliar positions.\n\nKyle Booten, 2020")
+    }
+
+
+    $( document ).ready(function() {
+      $("#nextLine").focus();
+      $("#pointInner").text(untilNextLevel)
+      //setInitialInfo();
+    });
+
+
+	</script>
+</html>
