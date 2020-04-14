@@ -8,16 +8,17 @@ Style🗜Vise is one of a series of "progymnasmata" that aim to repurpose the te
 
 ***
 
-A web-based version can be tested [here](https://stylevise.herokuapp.com/). However, I prefer the command line interface version, also in this repository. To interact with STYLE🗜VISE via the command line:
+A web-based version can be tested [here](https://stylevise.herokuapp.com/).  (It is a bit slow to load.) However, I prefer the command line interface version, also in this repository. To interact with STYLE🗜VISE via the command line:
 
     python Stylevise.py
 
-The CLI version has certain advantages over a full-fledged GUI.  Interactions with the program are easily recorded (output by default to `sv_output.txt`).  Because the interface uses the `cmd` module, it is possible to cycle through previous commands (on my Mac, by pressing `↑`). Since developing an interface with `cmd` is less fuss than making a GUI, it is also easier to change. I plan on adding features to the CLI that allow the user to keep track of and analyze their progress across sessions. Also, there is a certain aesthetic charm in the way that a CLI's minimalism focuses attention on the dyadic interaction between human and computer. 
+The CLI version has certain advantages over a full-fledged GUI.  Interactions with the program are easily recorded (output by default to `sv_output.txt`).   Since developing an interface with `cmd` is less fuss than making a GUI, it is also easier to change. I plan on adding features to the CLI that allow the user to keep track of and analyze their progress across sessions. There is a certain aesthetic charm in the way that a CLI's minimalism focuses attention on the dyadic interaction between human and computer. And, without all the fuss of sending queries to and fro, the CLI app should run a bit quicker.
+
+Because the CLI uses the `cmd` module, it is possible to cycle through previous commands (on my Mac, by pressing `↑`).
 
 For convenience, the output file and initial difficulty level can be set via the command line, e.g.:
 
     python Stylevise.py -o anotheroutput.txt -l 2 
-
 
 The online demo version uses SpaCy's [`en_core_web_sm` model](https://spacy.io/usage/models).  Running locally, both the CLI and GUI versions will first look for the `en` model before defaulting to `en_core_web_sm`.  The `en` model probably works better, so I recommend using it. 
 
