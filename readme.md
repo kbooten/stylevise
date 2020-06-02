@@ -8,7 +8,7 @@ Style🗜Vise is one of a series of "progymnasmata" that aim to repurpose the te
 
 ***
 
-A web-based version can be tested [here](https://stylevise.herokuapp.com/).  (It is a bit slow to load.) However, I prefer the command line interface version, also in this repository. To interact with STYLE🗜VISE via the command line:
+A web-based version can be tested [here](https://stylevise.herokuapp.com/).  (It is a bit slow to load, and there can be some annoying lag---something I hope to fix.) However, I prefer the command line interface version, also in this repository. To interact with STYLE🗜VISE via the command line:
 
     python Stylevise.py
 
