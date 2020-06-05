@@ -12,7 +12,7 @@ A web-based version can be tested [here](https://stylevise.herokuapp.com/).  (It
 
     python Stylevise.py
 
-The CLI version has certain advantages over a full-fledged GUI.  Interactions with the program are easily recorded (output by default to `sv_output.txt`).   Since developing an interface with `cmd` is less fuss than making a GUI, it is also easier to change. The CLI version also saves keeps track of what the user has written in previous sessions and demands that they differ from those as well. There is also a certain aesthetic charm in the way that a CLI's minimalism focuses attention on the dyadic interaction between human and computer. And, without all the fuss of sending queries to and fro, the CLI app should run a bit more quickly and reliably.
+The CLI version has certain advantages over a full-fledged GUI.  Interactions with the program are easily recorded (output by default to `sv_output.txt`).   Since developing an interface with `cmd` is less fuss than making a GUI, it is also easier to change. The CLI version also remembers what the user has written in previous sessions and demands that they differ from those sentences as well. There is also a certain aesthetic charm in the way that a CLI's minimalism focuses attention on the dyadic interaction between human and computer. And, without all the fuss of sending queries to and fro, the CLI app should run a bit more quickly and reliably.
 
 Because the CLI uses the `cmd` module, it is possible to cycle through previous commands (on my Mac, by pressing `↑`).
 
