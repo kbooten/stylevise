@@ -50,7 +50,7 @@ class Game(cmd.Cmd):
 	def restart(self):
 		"set a bunch of variables for one attempt of the game. record time."
 		self.level = self.starting_level
-		self.old_sents = []
+		#self.old_sents = []
 		self.total_points = 0
 		self.level_points = 0
 		self.points_to_next_level = 10
@@ -61,6 +61,10 @@ class Game(cmd.Cmd):
 		## time
 		time_string = time.asctime( time.localtime(time.time()) )
 		self.output_file.write("\n"+time_string+"\n") 
+
+		## get the old sentences stored in a text file
+		self.old_sents_file = open('old_sents.txt','a+')
+		self.old_sents = [s.rstrip("\n") for s in self.old_sents_file.readlines()]
 
 
 	def level_banner(self):
@@ -108,7 +112,9 @@ class Game(cmd.Cmd):
 				to_print+=self.space+"👍+1\n"
 			else:
 				to_print+=self.space+"👍"+random.choice(self.nice_comments)+"\n"
+			## add to current list of old_sents but also to file
 			self.old_sents.append(judgment['originalLine'])
+			self.old_sents_file.write(judgment['originalLine']+"\n")
 			self.total_points+=1
 			self.level_points+=1
 		### now maybe change level
