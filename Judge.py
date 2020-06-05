@@ -7,7 +7,6 @@ import json
 
 with open('easy_medium_hard_expert_evil.json','r') as f:
 	easy_medium_hard_expert_evil =  json.load(f)
-
 	
 import spacy
 

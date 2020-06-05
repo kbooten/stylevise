@@ -42,7 +42,7 @@ class Game(cmd.Cmd):
 	## internal events
 
 	def special_print(self,text):
-		"duplicates input---print and addto file"
+		"duplicates input---print and add to file"
 		self.output_file.write(text+"\n")
 		print(text)
 
@@ -90,16 +90,19 @@ class Game(cmd.Cmd):
 		cue other functions to reply to the player's input
 		"""
 		to_print = ""
+		## not interesting
 		if judgment['unique']==False:
 			to_print+=self.space+"*Yawn*---you have already written:\n"
 			to_print+=self.space+'"'+judgment['prevSent']+'"\n'
 			to_print+=self.space+"💖-1\n"
 			self.life-=1
+		## not interesting
 		elif judgment['interesting']==False:
 			to_print+=self.space+self.scratch_out(judgment['markedUp'])+"\n"
 			to_print+=self.space+random.choice(self.mean_comments)+"\n"
 			to_print+=self.space+"💖-1\n"
 			self.life-=1
+		## interesting & unique
 		else:
 			if random.choice([True,True,True,False]):
 				to_print+=self.space+"👍+1\n"
@@ -121,7 +124,6 @@ class Game(cmd.Cmd):
 				self.level+=1
 				to_print+=self.level_banner()
 		return to_print
-
 
 
 	def win(self):
