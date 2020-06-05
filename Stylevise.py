@@ -63,8 +63,10 @@ class Game(cmd.Cmd):
 		self.output_file.write("\n"+time_string+"\n") 
 
 		## get the old sentences stored in a text file
-		self.old_sents_file = open('old_sents.txt','a+')
-		self.old_sents = [s.rstrip("\n") for s in self.old_sents_file.readlines()]
+		with open('old_sents.txt','r') as f:
+			self.old_sents = [s.rstrip("\n") for s in f.readlines()]
+		## now open append
+		self.old_sents_file = open('old_sents.txt','a+') 
 
 
 	def level_banner(self):
