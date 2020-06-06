@@ -63,8 +63,11 @@ class Game(cmd.Cmd):
 		self.output_file.write("\n"+time_string+"\n") 
 
 		## get the old sentences stored in a text file
-		with open('old_sents.txt','r') as f:
-			self.old_sents = [s.rstrip("\n") for s in f.readlines()]
+		try:
+			with open('old_sents.txt','r') as f:
+				self.old_sents = [s.rstrip("\n") for s in f.readlines()]
+		except FileNotFoundError: ## no file yet
+			self.old_sents = []
 		## now open append
 		self.old_sents_file = open('old_sents.txt','a+') 
 
