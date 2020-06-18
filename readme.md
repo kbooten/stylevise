@@ -24,7 +24,7 @@ The online demo version uses SpaCy's [`en_core_web_sm` model](https://spacy.io/u
 
 ***
 
-Described in a talk, "Language Models and 'Models of Experience,'" *Vilém Flusser and his "Languages"*, Vilém Flusser Archive, June 2020. 
+Described in a conference talk, "Language Models and 'Models of Experience,'" *Vilém Flusser and his "Languages"*, Vilém Flusser Archive, June 2020. 
 
 
 
