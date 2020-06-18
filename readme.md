@@ -24,18 +24,7 @@ The online demo version uses SpaCy's [`en_core_web_sm` model](https://spacy.io/u
 
 ***
 
-To see how syntax patterns were extracted from the corpora, see `getting_syntax_ngrams.ipynb`.
-
-The citation for the Amazon review data:
-
-
-    @misc{snapnets,
-      author       = {Jure Leskovec and Andrej Krevl},
-      title        = {{SNAP Datasets}: {Stanford} Large Network Dataset Collection},
-      howpublished = {\url{http://snap.stanford.edu/data}},
-      month        = jun,
-      year         = 2014
-    }
+Described in a talk, "Language Models and Models of Experience," *Vilém Flusser and his "Languages"*, Vilém Flusser Archive, June 2020. 
 
 
 
