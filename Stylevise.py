@@ -134,6 +134,7 @@ class Game(cmd.Cmd):
 			if self.level<self.judge.max_level: ## should be 5
 				self.level+=1
 				to_print+=self.level_banner()
+				self.level_points = 0
 		return to_print
 
 
