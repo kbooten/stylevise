@@ -86,7 +86,7 @@ class Judge:
 	def _annotate(self,tagged,overlap):
 		taggedcopy = tagged[:]
 		for o in overlap:
-			for i in range(len(tagged)-len(o)):
+			for i in range(len(tagged)-(len(o)-1)):
 				if o==tuple([tag for token,tag in tagged[i:i+len(o)]]):
 					for t in range(i,i+len(o)):
 						token,tag = taggedcopy[t]
@@ -117,7 +117,7 @@ class Judge:
 			except:
 				## unique,
 				pass
-		print(overlap)
+		#print(overlap)
 		if overlap!=[]:
 			annotated = self._annotate(tagged,overlap)
 			return (False, annotated)
