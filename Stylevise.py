@@ -125,7 +125,7 @@ class Game(cmd.Cmd):
 		### now maybe change level
 		if self.life==0:
 			self.dead = True
-			to_print += "%sOut of 💖s.\n%sGAME OVER\n%sYou earned %d points this time.\n%sType 'play' to start again\n" % (self.space,self.space,self.space,self.total_points,self.space)
+			to_print += "%sOut of 💖s.\n%sGAME OVER\n%sYou earned %d point%s this time.\n%sType 'play' to start again\n".replace('1 points','1 point') % (self.space,self.space,self.space,self.total_points,"s" if self.total_points!=1 else "",self.space)
 		elif self.life==1:
 			if self.life_warned==False:
 				self.life_warned==True
@@ -156,7 +156,7 @@ class Game(cmd.Cmd):
 	def do_quit(self,args):
 		"Quit the game"
 		try:
-			self.special_print("%sYou earned %d points this time.\n" % (self.space,self.total_points))
+			self.special_print("%sYou earned %d point%s this time.\n" % (self.space,self.total_points,"s" if self.total_points!=1 else ""))
 			print("%sSession data saved to %s.\n" % (self.space,self.output_file.name)) ## don't record
 			self.output_file.close()
 		except:
