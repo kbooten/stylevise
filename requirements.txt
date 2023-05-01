@@ -1,4 +1,4 @@
-Flask==1.1.1
+Flask==2.3.2
 editdistance==0.5.3
 spacy==2.2.4
 nltk==3.4.5
